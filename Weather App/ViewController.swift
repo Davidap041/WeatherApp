@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     private lazy var headerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "contrastColor")
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 20
         return view
@@ -54,6 +54,76 @@ class ViewController: UIViewController {
         return imageView
     }()
     
+    private lazy var humidityLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Umidade"
+        label.font = UIFont.systemFont(ofSize: 12,weight: .semibold)
+        label.textColor = UIColor(named: "contrastColor")
+        
+        return label
+    }()
+
+    private lazy var humidityValueLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "100mm"
+        label.font = UIFont.systemFont(ofSize: 12,weight: .semibold)
+        label.textColor = UIColor(named: "contrastColor")
+        
+        return label
+    }()
+    
+    private lazy var humidityStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [humidityLabel,humidityValueLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        
+        
+        return stackView
+    }()
+    
+    private lazy var windLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Vento"
+        label.font = UIFont.systemFont(ofSize: 12,weight: .semibold)
+        label.textColor = UIColor(named: "contrastColor")
+        
+        return label
+    }()
+
+    private lazy var windValueLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "10Km/h"
+        label.font = UIFont.systemFont(ofSize: 12,weight: .semibold)
+        label.textColor = UIColor(named: "contrastColor")
+        
+        return label
+    }()
+    
+    private lazy var windStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [windLabel,windValueLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        
+        
+        return stackView
+    }()
+    
+    private lazy var stackStacks: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [humidityStackView,windStackView])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 3
+        stackView.backgroundColor = .softGray
+        stackView.layer.cornerRadius = 10
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 24, bottom: 12, trailing: 24)
+        
+        return stackView
+    }()
     // MARK: - Cycles
     // setup after loading the view in the first time.
     override func viewDidLoad() {
@@ -96,10 +166,12 @@ class ViewController: UIViewController {
     private func setHierarchy(){
         view.addSubview(backGroundView)
         view.addSubview(headerView)
+        view.addSubview(stackStacks)
         
         headerView.addSubview(cityLabel)
         headerView.addSubview(temperatureLabel)
         headerView.addSubview(weatherIcon)
+       
     }
     
     private func setContraints(){
@@ -131,6 +203,13 @@ class ViewController: UIViewController {
         weatherIcon.trailingAnchor.constraint(equalTo: headerView.trailingAnchor,constant: -26).isActive = true
         weatherIcon.centerYAnchor.constraint(equalTo: temperatureLabel.centerYAnchor).isActive = true
         weatherIcon.leadingAnchor.constraint(equalTo: temperatureLabel.trailingAnchor,constant: 15).isActive = true
+        
+        // stack stacks View
+        stackStacks.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 24).isActive = true
+        stackStacks.widthAnchor.constraint(equalToConstant: 206).isActive = true
+        stackStacks.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
+        
+        
         
     }
     
