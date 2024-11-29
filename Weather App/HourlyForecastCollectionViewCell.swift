@@ -15,7 +15,7 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "12:00"
-        label.textColor = .constrastColor
+        label.textColor = .contrastColor
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
         return label
@@ -32,7 +32,7 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "25ºC"
         label.textAlignment = .center
-        label.textColor = .constrastColor
+        label.textColor = .contrastColor
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -44,7 +44,7 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
         stackView.isLayoutMarginsRelativeArrangement = true        
         stackView.layer.borderWidth = 1
-        stackView.layer.borderColor = UIColor.constrastColor?.cgColor
+        stackView.layer.borderColor = UIColor.contrastColor?.cgColor
         stackView.layer.cornerRadius = 20
         
         return stackView
@@ -70,11 +70,7 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
         
     }
     private func setConstraints(){
-        stackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        
+        stackView.setConstraintsToParent(contentView)        
         imageIcon.heightAnchor.constraint(equalToConstant: 33).isActive = true
     }
     

@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     private lazy var headerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .constrastColor
+        view.backgroundColor = .contrastColor
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 20
         return view
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Umidade"
         label.font = UIFont.systemFont(ofSize: 12,weight: .semibold)
-        label.textColor = .constrastColor
+        label.textColor = .contrastColor
         
         return label
     }()
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "100mm"
         label.font = UIFont.systemFont(ofSize: 12,weight: .semibold)
-        label.textColor = .constrastColor
+        label.textColor = .contrastColor
         
         return label
     }()
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Vento"
         label.font = UIFont.systemFont(ofSize: 12,weight: .semibold)
-        label.textColor = .constrastColor
+        label.textColor = .contrastColor
         
         return label
     }()
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "10Km/h"
         label.font = UIFont.systemFont(ofSize: 12,weight: .semibold)
-        label.textColor = .constrastColor
+        label.textColor = .contrastColor
         
         return label
     }()
@@ -130,7 +130,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Previsão por Hora"
-        label.textColor = .constrastColor
+        label.textColor = .contrastColor
         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         label.textAlignment = .center
         
@@ -147,10 +147,30 @@ class ViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
-        
+        collectionView.clipsToBounds = true
         collectionView.register(HourlyForecastCollectionViewCell.self, forCellWithReuseIdentifier: HourlyForecastCollectionViewCell.identifier)
         
         return collectionView
+    }()
+    
+    private lazy var dailyForecastLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Próximos Dias"
+        label.textColor = .contrastColor
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        label.textAlignment = .center
+       return label
+    }()
+    
+    private lazy var dailyForecastTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.dataSource = self
+        tableView.register(DailyForecastTableViewCell.self, forCellReuseIdentifier: DailyForecastTableViewCell.id)
+        
+        return tableView
     }()
     
     // MARK: - Cycles
@@ -198,6 +218,9 @@ class ViewController: UIViewController {
         view.addSubview(stackStacks)
         view.addSubview(hourlyForecastLabel)
         view.addSubview(hourlyCollectionView)
+        view.addSubview(dailyForecastLabel)
+        view.addSubview(dailyForecastTableView)
+        
         
         headerView.addSubview(cityLabel)
         headerView.addSubview(temperatureLabel)
@@ -207,16 +230,13 @@ class ViewController: UIViewController {
     
     private func setContraints(){
         // backgound contraints
-        backGroundView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
-        backGroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        backGroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        backGroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        backGroundView.setConstraintsToParent(view)
         
         // header contraints
-        headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 59).isActive = true
+        headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 40).isActive = true
         headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 35).isActive = true
         headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: 169).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         // city contraints
         cityLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 15).isActive = true
@@ -225,7 +245,7 @@ class ViewController: UIViewController {
         cityLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         // temperature contraints
-        temperatureLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 21).isActive = true
+        temperatureLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 12).isActive = true
         temperatureLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 26).isActive = true
         
         // weather icon contraints
@@ -251,6 +271,18 @@ class ViewController: UIViewController {
         hourlyCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         hourlyCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
+        // daily Forecast label contraints
+        dailyForecastLabel.topAnchor.constraint(equalTo: hourlyCollectionView.bottomAnchor,constant: 29).isActive = true
+        dailyForecastLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 35).isActive = true
+        dailyForecastLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35).isActive = true
+        
+        // daily Forecast Table View contraints
+        dailyForecastTableView.topAnchor.constraint(equalTo: dailyForecastLabel.bottomAnchor,constant: 30).isActive = true
+        dailyForecastTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        dailyForecastTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        dailyForecastTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        
     }
     
 }
@@ -267,4 +299,15 @@ extension ViewController :UICollectionViewDataSource{
     }
     
     
+}
+extension ViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.id, for: indexPath)
+        return cell
+    }
+        
 }
