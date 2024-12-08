@@ -169,7 +169,10 @@ class ViewController: UIViewController {
     }()
     // MARK: - Api Call
     private let service = Service()
-    private let city = City(lat: "-23.5489", lon: "-46.6388", name: "São Paulo")
+    
+    private let city = City(lat: ProcessInfo.processInfo.environment["LAT_HOME"] ?? "0",
+                            lon: ProcessInfo.processInfo.environment["LONG_HOME"] ?? "0",
+                            name: "Casa")
     private var forecastResponse: ForecastResponse?
     
     // MARK: - Cycles
