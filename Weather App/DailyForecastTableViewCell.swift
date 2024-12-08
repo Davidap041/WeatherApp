@@ -62,6 +62,13 @@ class DailyForecastTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+// MARK: - FETCH DATA
+    func loadData(weekDay: String?, min: String?, max: String?, icon: UIImage?){
+        weekDayLabel.text = weekDay
+        minTemperatureLabel.text = "min \(min ?? "")"
+        maxTemperatureLabel.text = "max \(max ?? "")"
+        iconImageView.image = icon
+    }
     
 // MARK: - SETUP AND CONSTRAINTS
     private func setup(){
@@ -77,7 +84,8 @@ class DailyForecastTableViewCell: UITableViewCell {
     }
     private func setConstraints(){
         stackView.setConstraintsToParent(contentView)
-        weekDayLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 50).isActive = true
+        weekDayLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 50).isActive = true      
     }
+   
 }
 

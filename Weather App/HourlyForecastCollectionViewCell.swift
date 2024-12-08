@@ -65,6 +65,11 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
         setHierarchy()
         setConstraints()
     }
+    func loadData(time: String?, icon: UIImage?, temp: String?){
+        hourLabel.text = time
+        imageIcon.image = icon
+        temperatureLabel.text = temp
+    }
     private func setHierarchy() {
         contentView.addSubview(stackView)
         
