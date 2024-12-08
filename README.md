@@ -16,13 +16,7 @@ This is a weather forecast application that fetches real-time weather data from 
 <img src="https://github.com/favicon.ico" width="48">
 <div style="display: flex; justify-content: space-around;">
   <div style="flex: 1; text-align: center;">
-    <img src="https://github.com/user-attachments/assets/2e062664-4a87-469d-8edb-73f3103697ea"  width="48" height: auto;" />
-  </div>
-  <div style="flex: 1; text-align: center;">
-    <img src="https://github.com/user-attachments/assets/5ba9987f-09e6-4945-ae5a-ae6f5cc3ffc9"  width="48" height: auto;" />
-  </div>
-  <div style="flex: 1; text-align: center;">
-    <img src="https://github.com/user-attachments/assets/e620ee56-a258-455d-bdd3-54ea66bf1061"  width="48" height: auto;" />
+    <img src="https://github.com/user-attachments/assets/2e062664-4a87-469d-8edb-73f3103697ea"  width="450" height: auto;" />
   </div>
 </div>
 
