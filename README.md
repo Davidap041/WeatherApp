@@ -95,3 +95,5 @@ if let apiKey = Bundle.main.infoDictionary?["WEATHER_API_KEY"] as? String,
     print("Latitude: \(latitude)")
     print("Longitude: \(longitude)")
 }
+```
+A special thanks to [bullas.atk@gmail.com](https://github.com/Bullas) for the helpful tutorial
